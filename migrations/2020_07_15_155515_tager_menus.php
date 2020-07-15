@@ -26,6 +26,7 @@ class TagerMenus extends Migration
             $table->id();
 
             $table->unsignedInteger('menu_id');
+            $table->unsignedInteger('parent_id')->nullable();
 
             $table->string('label');
             $table->string('url')->nullable();
@@ -33,6 +34,7 @@ class TagerMenus extends Migration
             $table->unsignedInteger('priority');
 
             $table->foreign('menu_id')->references('id')->on('tager_menus');
+            $table->foreign('parent_id')->references('id')->on('tager_menu_items');
         });
     }
 
