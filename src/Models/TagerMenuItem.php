@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Mail\Models;
+namespace OZiTAG\Tager\Backend\Menus\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

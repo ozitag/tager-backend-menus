@@ -20,13 +20,15 @@ class TagerMenus extends Migration
             $table->string('label')->nullable();
 
             $table->unique('alias');
+
+            $table->softDeletes();
         });
 
         Schema::create('tager_menu_items', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedInteger('menu_id');
-            $table->unsignedInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('menu_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
 
             $table->string('label');
             $table->string('url')->nullable();
