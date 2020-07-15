@@ -3,7 +3,7 @@
 namespace OZiTAG\Tager\Backend\Menus\Controllers;
 
 use OZiTAG\Tager\Backend\Core\Controller;
-use OZiTAG\Tager\Backend\Menus\Guest\ViewMenuFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Guest\ViewMenuFeature;
 
 class PublicController extends Controller
 {

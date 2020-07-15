@@ -3,16 +3,16 @@
 namespace OZiTAG\Tager\Backend\Menus\Controllers;
 
 use OZiTAG\Tager\Backend\Core\Controller;
-use OZiTAG\Tager\Backend\Menus\Admin\CreateMenuFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\CreateMenuItemFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\ListMenusFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\ListMenuItemsFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\RemoveMenuFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\RemoveMenuItemFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\UpdateMenuFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\UpdateMenuItemFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\ViewMenuFeature;
-use OZiTAG\Tager\Backend\Menus\Admin\ViewMenuItemFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\CreateMenuFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\CreateMenuItemFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\ListMenusFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\ListMenuItemsFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\RemoveMenuFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\RemoveMenuItemFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateMenuFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateMenuItemFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewMenuFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewMenuItemFeature;
 
 class AdminController extends Controller
 {

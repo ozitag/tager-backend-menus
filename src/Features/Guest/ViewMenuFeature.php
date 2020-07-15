@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Menus\Guest;
+namespace OZiTAG\Tager\Backend\Menus\Features\Guest;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Core\Feature;
