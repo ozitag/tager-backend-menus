@@ -3,10 +3,12 @@
 namespace OZiTAG\Tager\Backend\Menus\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Kalnoy\Nestedset\NodeTrait;
 
 class TagerMenuItem extends Model
 {
+    use NodeTrait;
+
     public $timestamps = false;
 
     protected $table = 'tager_menu_items';
@@ -18,10 +20,13 @@ class TagerMenuItem extends Model
      */
     protected $fillable = [
         'menu_id',
-        'parent_id',
         'label',
         'url',
         'open_new_tab',
-        'priority',
     ];
+
+    protected function getScopeAttributes()
+    {
+        return [ 'menu_id' ];
+    }
 }
