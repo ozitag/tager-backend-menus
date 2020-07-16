@@ -21,12 +21,12 @@ class TagerMenuItem extends Model
     protected $fillable = [
         'menu_id',
         'label',
-        'url',
-        'open_new_tab',
+        'link',
+        'is_new_tab',
     ];
 
     protected function getScopeAttributes()
     {
-        return [ 'menu_id' ];
+        return ['menu_id'];
     }
 }

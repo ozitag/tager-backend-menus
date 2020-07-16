@@ -30,8 +30,8 @@ class TagerMenus extends Migration
             $table->unsignedBigInteger('menu_id');
 
             $table->string('label');
-            $table->string('url')->nullable();
-            $table->boolean('open_new_tab')->default(false);
+            $table->string('link')->nullable();
+            $table->boolean('is_new_tab')->default(false);
 
             $table->nestedSet();
 
