@@ -3,10 +3,11 @@
 namespace OZiTAG\Tager\Backend\Menus;
 
 use Illuminate\Support\ServiceProvider;
+use Kalnoy\Nestedset\NestedSetServiceProvider;
 use OZiTAG\Tager\Backend\Mail\Commands\FlushMailTemplatesCommand;
 use OZiTAG\Tager\Backend\Settings\Commands\FlushSettingsCommand;
 
-class TagerBackendMenusServiceProvider extends ServiceProvider
+class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
 {
     /**
      * Register any application services.
@@ -15,7 +16,7 @@ class TagerBackendMenusServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        parent::register();
     }
 
     /**
