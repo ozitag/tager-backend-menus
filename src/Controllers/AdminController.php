@@ -9,8 +9,10 @@ use OZiTAG\Tager\Backend\Menus\Features\Admin\ListMenusFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\ListMenuItemsFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\RemoveMenuFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\RemoveMenuItemFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateItemsFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateMenuFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateMenuItemFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewItemsFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewMenuFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewMenuItemFeature;
 
@@ -47,38 +49,17 @@ class AdminController extends Controller
         ]);
     }
 
-    public function items($id)
+    public function viewItems($id)
     {
-        return $this->serve(ListMenuItemsFeature::class, [
-            'id' => $id
-        ]);
-    }
-
-    public function createMenuItem($id)
-    {
-        return $this->serve(CreateMenuItemFeature::class, [
+        return $this->serve(ViewItemsFeature::class, [
             'menuId' => $id
         ]);
     }
 
-    public function updateMenuItem($id)
+    public function updateItems($id)
     {
-        return $this->serve(UpdateMenuItemFeature::class, [
-            'id' => $id
-        ]);
-    }
-
-    public function viewMenuItem($id)
-    {
-        return $this->serve(ViewMenuItemFeature::class, [
-            'id' => $id
-        ]);
-    }
-
-    public function removeMenuItem($id)
-    {
-        return $this->serve(RemoveMenuItemFeature::class, [
-            'id' => $id
+        return $this->serve(UpdateItemsFeature::class, [
+            'menuId' => $id
         ]);
     }
 }
