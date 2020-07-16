@@ -11,6 +11,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', '
     Route::put('/menus/{id}', \OZiTAG\Tager\Backend\Menus\Controllers\AdminController::class . '@update');
     Route::delete('/menus/{id}', \OZiTAG\Tager\Backend\Menus\Controllers\AdminController::class . '@delete');
 
-    Route::get('/menus/{id}/items', \OZiTAG\Tager\Backend\Menus\Controllers\AdminController::class . '@viewItems');
-    Route::put('/menus/{id}/items', \OZiTAG\Tager\Backend\Menus\Controllers\AdminController::class . '@updateItems');
+    Route::get('/menus/{alias}/items', \OZiTAG\Tager\Backend\Menus\Controllers\AdminController::class . '@viewItems');
+    Route::put('/menus/{alias}/items', \OZiTAG\Tager\Backend\Menus\Controllers\AdminController::class . '@updateItems');
 });

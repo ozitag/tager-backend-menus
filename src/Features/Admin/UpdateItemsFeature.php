@@ -4,6 +4,7 @@ namespace OZiTAG\Tager\Backend\Menus\Features\Admin;
 
 use OZiTAG\Tager\Backend\Core\Feature;
 use OZiTAG\Tager\Backend\Core\SuccessResource;
+use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByAliasJob;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByIdJob;
 use OZiTAG\Tager\Backend\Menus\Jobs\SaveMenuItemsJob;
 use OZiTAG\Tager\Backend\Menus\Requests\MenuItemsRequest;
@@ -11,16 +12,16 @@ use OZiTAG\Tager\Backend\Menus\Resources\MenuResource;
 
 class UpdateItemsFeature extends Feature
 {
-    private $menu_id;
+    private $menu_alias;
 
-    public function __construct($menuId)
+    public function __construct($menuAlias)
     {
-        $this->menu_id = $menuId;
+        $this->menu_alias = $menuAlias;
     }
 
     public function handle(MenuItemsRequest $request)
     {
-        $model = $this->run(GetMenuByIdJob::class, ['id' => $this->menu_id]);
+        $model = $this->run(GetMenuByAliasJob::class, ['alias' => $this->menu_alias]);
 
         $model = $this->run(SaveMenuItemsJob::class, [
             'menu' => $model,

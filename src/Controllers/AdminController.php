@@ -49,17 +49,17 @@ class AdminController extends Controller
         ]);
     }
 
-    public function viewItems($id)
+    public function viewItems($alias)
     {
         return $this->serve(ViewItemsFeature::class, [
-            'menuId' => $id
+            'menuAlias' => $alias
         ]);
     }
 
-    public function updateItems($id)
+    public function updateItems($alias)
     {
         return $this->serve(UpdateItemsFeature::class, [
-            'menuId' => $id
+            'menuAlias' => $alias
         ]);
     }
 }
