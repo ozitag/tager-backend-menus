@@ -34,12 +34,12 @@ class SaveMenuItemsJob
     {
         $model = new TagerMenuItem([
             'menu_id' => $this->menu->id,
-            'parent_id' => $parent ? $parent->id : null,
             'label' => $item['label'],
             'link' => $item['link'],
             'is_new_tab' => $item['isNewTab'],
         ]);
 
+        $model->parent_id = $parent ? $parent->id : null;
         $model->save();
 
         if (isset($item['children']) && is_array($item['children'])) {
