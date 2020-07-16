@@ -13,6 +13,17 @@ class TagerMenus extends Migration
      */
     public function up()
     {
+        Schema::create('tager_menus', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('alias');
+            $table->string('label')->nullable();
+
+            $table->unique('alias');
+
+            $table->softDeletes();
+        });
+
         Schema::create('tager_menu_items', function (Blueprint $table) {
             $table->id();
 

@@ -5,6 +5,7 @@ namespace OZiTAG\Tager\Backend\Menus\Features\Admin;
 use OZiTAG\Tager\Backend\Core\Feature;
 use OZiTAG\Tager\Backend\Core\SuccessResource;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByIdJob;
+use OZiTAG\Tager\Backend\Menus\Requests\MenuItemsRequest;
 
 class UpdateItemsFeature extends Feature
 {
@@ -15,7 +16,7 @@ class UpdateItemsFeature extends Feature
         $this->menu_id = $menuId;
     }
 
-    public function handle()
+    public function handle(MenuItemsRequest $request)
     {
         $model = $this->run(GetMenuByIdJob::class, ['id' => $this->menu_id]);
 
