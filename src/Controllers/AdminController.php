@@ -13,6 +13,7 @@ use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateItemsFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateMenuFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\UpdateMenuItemFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewItemsFeature;
+use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewMenuByAliasFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewMenuFeature;
 use OZiTAG\Tager\Backend\Menus\Features\Admin\ViewMenuItemFeature;
 
@@ -32,6 +33,13 @@ class AdminController extends Controller
     {
         return $this->serve(ViewMenuFeature::class, [
             'id' => $id
+        ]);
+    }
+
+    public function viewByAlias($alias)
+    {
+        return $this->serve(ViewMenuByAliasFeature::class, [
+            'alias' => $alias
         ]);
     }
 
