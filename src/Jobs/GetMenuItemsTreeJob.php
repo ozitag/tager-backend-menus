@@ -27,7 +27,7 @@ class GetMenuItemsTreeJob
                     'id' => $item->id,
                     'label' => $item->label,
                     'link' => $item->link,
-                    'isNewTab' => $item->is_new_tab,
+                    'isNewTab' => (bool)$item->is_new_tab,
                     'children' => $traverse($item->children)
                 ];
             }
