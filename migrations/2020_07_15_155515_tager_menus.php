@@ -28,15 +28,15 @@ class TagerMenus extends Migration
             $table->id();
 
             $table->unsignedBigInteger('menu_id');
-            $table->unsignedBigInteger('parent_id')->nullable();
 
             $table->string('label');
             $table->string('url')->nullable();
             $table->boolean('open_new_tab')->default(false);
             $table->unsignedInteger('priority');
 
+            $table->nestedSet();
+
             $table->foreign('menu_id')->references('id')->on('tager_menus');
-            $table->foreign('parent_id')->references('id')->on('tager_menu_items');
         });
     }
 
