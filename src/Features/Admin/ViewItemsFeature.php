@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Core\Feature;
 use OZiTAG\Tager\Backend\Core\SuccessResource;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByIdJob;
+use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuItemsJob;
+use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuItemsTreeJob;
 use OZiTAG\Tager\Backend\Menus\Models\TagerMenuItem;
 
 class ViewItemsFeature extends Feature
@@ -21,28 +23,8 @@ class ViewItemsFeature extends Feature
     {
         $model = $this->run(GetMenuByIdJob::class, ['id' => $this->menu_id]);
 
-        $tree = TagerMenuItem::scoped(['menu_id' => $model->id])->get()->toTree();
+        $items = $this->run(GetMenuItemsTreeJob::class, ['menu' => $model]);
 
-        $result = [];
-
-        $traverse = function ($items) use (&$traverse) {
-            $result = [];
-
-            foreach ($items as $item) {
-                $result[] = [
-                    'id' => $item->id,
-                    'label' => $item->label,
-                    'link' => $item->link,
-                    'isNewTab' => $item->is_new_tab,
-                    'children' => $traverse($item->children)
-                ];
-            }
-
-            return $result;
-        };
-
-        $result = $traverse($tree);
-
-        return new JsonResource($result);
+        return new JsonResource($items);
     }
 }
