@@ -5,6 +5,7 @@ namespace OZiTAG\Tager\Backend\Menus;
 use Illuminate\Support\ServiceProvider;
 use Kalnoy\Nestedset\NestedSetServiceProvider;
 use OZiTAG\Tager\Backend\Mail\Commands\FlushMailTemplatesCommand;
+use OZiTAG\Tager\Backend\Menus\Commands\FlushMenusCommand;
 use OZiTAG\Tager\Backend\Settings\Commands\FlushSettingsCommand;
 
 class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
@@ -29,5 +30,15 @@ class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+
+        $this->publishes([
+            __DIR__ . '/../config.php' => config_path('tager-menus.php'),
+        ]);
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                FlushMenusCommand::class,
+            ]);
+        }
     }
 }
