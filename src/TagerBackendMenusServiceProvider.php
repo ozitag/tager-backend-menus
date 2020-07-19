@@ -2,13 +2,12 @@
 
 namespace OZiTAG\Tager\Backend\Menus;
 
-use Illuminate\Support\ServiceProvider;
-use Kalnoy\Nestedset\NestedSetServiceProvider;
-use OZiTAG\Tager\Backend\Mail\Commands\FlushMailTemplatesCommand;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
+use Kalnoy\Nestedset\NestedSet;
 use OZiTAG\Tager\Backend\Menus\Commands\FlushMenusCommand;
-use OZiTAG\Tager\Backend\Settings\Commands\FlushSettingsCommand;
 
-class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
+class TagerBackendMenusServiceProvider extends RouteServiceProvider
 {
     /**
      * Register any application services.
@@ -17,7 +16,13 @@ class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
      */
     public function register()
     {
-        parent::register();
+        Blueprint::macro('nestedSet', function () {
+            NestedSet::columns($this);
+        });
+
+        Blueprint::macro('dropNestedSet', function () {
+            NestedSet::dropColumns($this);
+        });
     }
 
     /**
@@ -40,5 +45,7 @@ class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
                 FlushMenusCommand::class,
             ]);
         }
+
+        parent::boot();
     }
 }
