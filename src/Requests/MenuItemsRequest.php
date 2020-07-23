@@ -2,7 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Menus\Requests;
 
-use OZiTAG\Tager\Backend\Core\FormRequest;
+use OZiTAG\Tager\Backend\Core\Http\FormRequest;
 
 class MenuItemsRequest extends FormRequest
 {
