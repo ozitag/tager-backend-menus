@@ -3,7 +3,7 @@
 namespace OZiTAG\Tager\Backend\Menus;
 
 use Kalnoy\Nestedset\NestedSetServiceProvider;
-use OZiTAG\Tager\Backend\Menus\Commands\FlushMenusCommand;
+use OZiTAG\Tager\Backend\Menus\Console\FlushMenusCommand;
 
 class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
 {

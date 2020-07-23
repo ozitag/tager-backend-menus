@@ -2,7 +2,6 @@
 
 namespace OZiTAG\Tager\Backend\Menus\Requests;
 
-use Ozerich\FileStorage\Rules\FileRule;
 use OZiTAG\Tager\Backend\Core\FormRequest;
 
 class MenuRequest extends FormRequest

@@ -3,7 +3,6 @@
 namespace OZiTAG\Tager\Backend\Menus\Repositories;
 
 use OZiTAG\Tager\Backend\Core\Repositories\EloquentRepository;
-use OZiTAG\Tager\Backend\Menus\Models\TagerMenu;
 use OZiTAG\Tager\Backend\Menus\Models\TagerMenuItem;
 
 class MenuItemsRepository extends EloquentRepository

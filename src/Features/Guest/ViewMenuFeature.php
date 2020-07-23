@@ -3,9 +3,8 @@
 namespace OZiTAG\Tager\Backend\Menus\Features\Guest;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use OZiTAG\Tager\Backend\Core\Feature;
+use OZiTAG\Tager\Backend\Core\Features\Feature;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByAliasJob;
-use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByIdJob;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuItemsTreeJob;
 
 class ViewMenuFeature extends Feature
