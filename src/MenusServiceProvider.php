@@ -5,7 +5,7 @@ namespace OZiTAG\Tager\Backend\Menus;
 use Kalnoy\Nestedset\NestedSetServiceProvider;
 use OZiTAG\Tager\Backend\Menus\Console\FlushMenusCommand;
 
-class TagerBackendMenusServiceProvider extends NestedSetServiceProvider
+class MenusServiceProvider extends NestedSetServiceProvider
 {
     /**
      * Register any application services.
