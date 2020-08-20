@@ -9,7 +9,7 @@ class MenuItemsRequest extends FormRequest
     public function rules()
     {
         return [
-            'items' => 'required',
+            'items' => 'array',
             'items.*' => 'array',
             'items.*.label' => 'string|required',
             'items.*.link' => 'nullable|string',
@@ -18,7 +18,6 @@ class MenuItemsRequest extends FormRequest
             'items.*.children.*.label' => 'string|required',
             'items.*.children.*.link' => 'nullable|string',
             'items.*.children.*.isNewTab' => 'boolean|required',
-            'items.*.children.*.children' => 'nullable|array',
             'items.*.children.*.children' => 'nullable|array',
             'items.*.children.*.children.*.label' => 'string|required',
             'items.*.children.*.children.*.link' => 'nullable|string',
