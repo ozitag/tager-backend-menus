@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use OZiTAG\Tager\Backend\Menus\Controllers\PublicController;
 use OZiTAG\Tager\Backend\Menus\Controllers\AdminController;
 
-Route::get('/tager/menu/{alias}', [PublicController::class, 'menu']);
+Route::group(['prefix' => 'tager/menus', 'middleware' => 'api.cache'], function () {
+    Route::get('/{alias}', [PublicController::class, 'menu']);
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', 'auth:api']], function () {
     Route::get('/menus', [AdminController::class, 'index']);

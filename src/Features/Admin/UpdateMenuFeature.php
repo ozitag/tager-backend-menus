@@ -3,6 +3,7 @@
 namespace OZiTAG\Tager\Backend\Menus\Features\Admin;
 
 use OZiTAG\Tager\Backend\Core\Features\Feature;
+use OZiTAG\Tager\Backend\HttpCache\HttpCache;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByIdJob;
 use OZiTAG\Tager\Backend\Menus\Jobs\UpdateMenuJob;
 use OZiTAG\Tager\Backend\Menus\Requests\MenuRequest;
@@ -17,7 +18,7 @@ class UpdateMenuFeature extends Feature
         $this->id = $id;
     }
 
-    public function handle(MenuRequest $request)
+    public function handle(MenuRequest $request, HttpCache $httpCache)
     {
         $model = $this->run(GetMenuByIdJob::class, ['id' => $this->id]);
 
@@ -26,6 +27,8 @@ class UpdateMenuFeature extends Feature
             'alias' => $request->alias,
             'label' => $request->label
         ]);
+
+        $httpCache->clear('tager/menus');
 
         return new MenuResource($model);
     }
