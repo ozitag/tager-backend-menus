@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Mail\Enums;
+namespace OZiTAG\Tager\Backend\Menus\Enums;
 
 use OZiTAG\Tager\Backend\Core\Enums\Enum;
 
