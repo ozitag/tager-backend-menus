@@ -10,14 +10,18 @@ use OZiTAG\Tager\Backend\Menus\TagerMenus;
 
 class GetMenuItemsTreeJob extends Job
 {
-    private $menu;
+    protected TagerMenu $menu;
 
-    public function __construct(TagerMenu $menu)
+    protected bool $replaceVariables;
+
+    public function __construct(TagerMenu $menu, bool $replaceVariables = false)
     {
         $this->menu = $menu;
+
+        $this->replaceVariables = $replaceVariables;
     }
 
-    public function handle(MenuItemsRepository $menuItemsRepository, TagerMenus $tagerMenus)
+    public function handle(TagerMenus $tagerMenus)
     {
         $tree = TagerMenuItem::scoped(['menu_id' => $this->menu->id])->get()->toTree();
 
@@ -28,14 +32,16 @@ class GetMenuItemsTreeJob extends Job
 
                 $label = $item->label;
 
-                $label = preg_replace_callback('#\{(.+?)\}#si', function ($item) use ($tagerMenus) {
-                    if ($tagerMenus->isVariableExisted($item[1])) {
-                        return $tagerMenus->getVariableValue($item[1]);
-                    } else {
-                        return $item[0];
-                    }
-                }, $label);
-                
+                if ($this->replaceVariables) {
+                    $label = preg_replace_callback('#\{(.+?)\}#si', function ($item) use ($tagerMenus) {
+                        if ($tagerMenus->isVariableExisted($item[1])) {
+                            return $tagerMenus->getVariableValue($item[1]);
+                        } else {
+                            return $item[0];
+                        }
+                    }, $label);
+                }
+
                 $result[] = [
                     'id' => $item->id,
                     'label' => $label,

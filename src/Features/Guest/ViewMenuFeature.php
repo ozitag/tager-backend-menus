@@ -9,9 +9,9 @@ use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuItemsTreeJob;
 
 class ViewMenuFeature extends Feature
 {
-    private $alias;
+    protected string $alias;
 
-    public function __construct($alias)
+    public function __construct(string $alias)
     {
         $this->alias = $alias;
     }
@@ -20,7 +20,10 @@ class ViewMenuFeature extends Feature
     {
         $model = $this->run(GetMenuByAliasJob::class, ['alias' => $this->alias]);
 
-        $items = $this->run(GetMenuItemsTreeJob::class, ['menu' => $model]);
+        $items = $this->run(GetMenuItemsTreeJob::class, [
+            'menu' => $model,
+            'replaceVariables' => true
+        ]);
 
         return new JsonResource($items);
     }
