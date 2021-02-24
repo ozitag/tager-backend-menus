@@ -3,10 +3,9 @@
 namespace OZiTAG\Tager\Backend\Menus\Jobs;
 
 use OZiTAG\Tager\Backend\Core\Jobs\Job;
+use OZiTAG\Tager\Backend\Core\TagerVariables;
 use OZiTAG\Tager\Backend\Menus\Models\TagerMenu;
 use OZiTAG\Tager\Backend\Menus\Models\TagerMenuItem;
-use OZiTAG\Tager\Backend\Menus\Repositories\MenuItemsRepository;
-use OZiTAG\Tager\Backend\Menus\TagerMenus;
 
 class GetMenuItemsTreeJob extends Job
 {
@@ -21,26 +20,15 @@ class GetMenuItemsTreeJob extends Job
         $this->replaceVariables = $replaceVariables;
     }
 
-    public function handle(TagerMenus $tagerMenus)
+    public function handle(TagerVariables $tagerVariables)
     {
         $tree = TagerMenuItem::scoped(['menu_id' => $this->menu->id])->get()->toTree();
 
-        $traverse = function ($items) use (&$traverse, $tagerMenus) {
+        $traverse = function ($items) use (&$traverse, $tagerVariables) {
             $result = [];
 
             foreach ($items as $item) {
-
-                $label = $item->label;
-
-                if ($this->replaceVariables) {
-                    $label = preg_replace_callback('#\{(.+?)\}#si', function ($item) use ($tagerMenus) {
-                        if ($tagerMenus->isVariableExisted($item[1])) {
-                            return $tagerMenus->getVariableValue($item[1]);
-                        } else {
-                            return $item[0];
-                        }
-                    }, $label);
-                }
+                $label = $this->replaceVariables ? $tagerVariables->processText($item->label) : $item->label;
 
                 $result[] = [
                     'id' => $item->id,
