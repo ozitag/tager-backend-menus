@@ -3,7 +3,7 @@
 namespace OZiTAG\Tager\Backend\Menus\Jobs;
 
 use OZiTAG\Tager\Backend\Core\Jobs\Job;
-use OZiTAG\Tager\Backend\Core\TagerVariables;
+use OZiTAG\Tager\Backend\Core\Utils\TagerVariables;
 use OZiTAG\Tager\Backend\Menus\Models\TagerMenu;
 use OZiTAG\Tager\Backend\Menus\Models\TagerMenuItem;
 
