@@ -28,6 +28,7 @@ class MenusServiceProvider extends NestedSetServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'tager-menus');
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
 
         $this->publishes([
@@ -40,8 +41,8 @@ class MenusServiceProvider extends NestedSetServiceProvider
             ]);
         }
 
-        TagerScopes::registerGroup('Menus', [
-            MenusScope::Edit => 'Edit menus'
+        TagerScopes::registerGroup(__('tager-menus::scopes.group'), [
+            MenusScope::Edit => __('tager-menus::scopes.edit')
         ]);
     }
 }
