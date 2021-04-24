@@ -4,8 +4,10 @@ namespace OZiTAG\Tager\Backend\Menus\Features\Guest;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
+use OZiTAG\Tager\Backend\Core\Utils\TagerVariables;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByAliasJob;
 use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuItemsTreeJob;
+use OZiTAG\Tager\Backend\Menus\Resources\MenuItemResource;
 
 class ViewMenuFeature extends Feature
 {
@@ -16,15 +18,20 @@ class ViewMenuFeature extends Feature
         $this->alias = $alias;
     }
 
-    public function handle()
+    public function handle(TagerVariables $tagerVariables)
     {
-        $model = $this->run(GetMenuByAliasJob::class, ['alias' => $this->alias]);
+        $this->run(GetMenuByAliasJob::class, ['alias' => $this->alias]);
 
         $items = $this->run(GetMenuItemsTreeJob::class, [
-            'menu' => $model,
-            'replaceVariables' => true
+            'alias' => $this->alias
         ]);
 
-        return new JsonResource($items);
+        $result = [];
+        foreach ($items as $item) {
+            $item['model']['label'] = $tagerVariables->processText($item->label);
+            $result[] = new MenuItemResource($item['model'], $item['children']);
+        }
+
+        return new JsonResource($result);
     }
 }

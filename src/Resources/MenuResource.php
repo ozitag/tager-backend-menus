@@ -11,7 +11,8 @@ class MenuResource extends JsonResource
         return [
             'id' => $this->id,
             'alias' => $this->alias,
-            'label' => $this->label
+            'label' => $this->label,
+            'supportsTree' => false
         ];
     }
 }

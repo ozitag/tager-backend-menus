@@ -2,23 +2,31 @@
 
 namespace OZiTAG\Tager\Backend\Menus\Features\Admin;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
-use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByIdJob;
-use OZiTAG\Tager\Backend\Menus\Resources\MenuResource;
+use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByAliasJob;
+use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuItemsTreeJob;
+use OZiTAG\Tager\Backend\Menus\Resources\AdminMenuResource;
 
 class ViewMenuFeature extends Feature
 {
-    private $id;
+    private string $alias;
 
-    public function __construct($id)
+    public function __construct(string $alias)
     {
-        $this->id = $id;
+        $this->alias = $alias;
     }
 
     public function handle()
     {
-        $model = $this->run(GetMenuByIdJob::class, ['id' => $this->id]);
+        $model = $this->run(GetMenuByAliasJob::class, [
+            'alias' => $this->alias
+        ]);
 
-        return new MenuResource($model);
+        $items = $this->run(GetMenuItemsTreeJob::class, [
+            'alias' => $this->alias
+        ]);
+
+        return new AdminMenuResource($this->alias, $model, $items);
     }
 }

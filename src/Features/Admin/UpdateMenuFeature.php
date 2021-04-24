@@ -3,33 +3,35 @@
 namespace OZiTAG\Tager\Backend\Menus\Features\Admin;
 
 use OZiTAG\Tager\Backend\Core\Features\Feature;
+use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
 use OZiTAG\Tager\Backend\HttpCache\HttpCache;
-use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByIdJob;
-use OZiTAG\Tager\Backend\Menus\Jobs\UpdateMenuJob;
-use OZiTAG\Tager\Backend\Menus\Requests\MenuRequest;
+use OZiTAG\Tager\Backend\Menus\Jobs\GetMenuByAliasJob;
+use OZiTAG\Tager\Backend\Menus\Jobs\SaveMenuItemsJob;
+use OZiTAG\Tager\Backend\Menus\Requests\MenuItemsRequest;
 use OZiTAG\Tager\Backend\Menus\Resources\MenuResource;
 
 class UpdateMenuFeature extends Feature
 {
-    private $id;
+    private string $alias;
 
-    public function __construct($id)
+    public function __construct(string $alias)
     {
-        $this->id = $id;
+        $this->alias = $alias;
     }
 
-    public function handle(MenuRequest $request, HttpCache $httpCache)
+    public function handle(MenuItemsRequest $request, HttpCache $httpCache)
     {
-        $model = $this->run(GetMenuByIdJob::class, ['id' => $this->id]);
+        $this->run(GetMenuByAliasJob::class, [
+            'alias' => $this->alias
+        ]);
 
-        $model = $this->run(UpdateMenuJob::class, [
-            'model' => $model,
-            'alias' => $request->alias,
-            'label' => $request->label
+        $this->run(SaveMenuItemsJob::class, [
+            'alias' => $this->alias,
+            'items' => $request->items
         ]);
 
         $httpCache->clear('tager/menus');
 
-        return new MenuResource($model);
+        return new SuccessResource();
     }
 }

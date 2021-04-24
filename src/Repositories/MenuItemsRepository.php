@@ -12,8 +12,8 @@ class MenuItemsRepository extends EloquentRepository
         parent::__construct($model);
     }
 
-    public function deleteByMenuId($menuId)
+    public function deleteByMenuAlias(string $menuAlias)
     {
-        TagerMenuItem::query()->where('menu_id', '=', $menuId)->delete();
+        TagerMenuItem::query()->where('menu_alias', '=', $menuAlias)->delete();
     }
 }

@@ -5,6 +5,16 @@ namespace OZiTAG\Tager\Backend\Menus\Models;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
+/**
+ * Class TagerMenuItem
+ * @package OZiTAG\Tager\Backend\Menus\Models
+ *
+ * @property integer $id
+ * @property string $menu_alias
+ * @property string $label
+ * @property string $link
+ * @property bool $is_new_tab
+ */
 class TagerMenuItem extends Model
 {
     use NodeTrait;
@@ -19,7 +29,7 @@ class TagerMenuItem extends Model
      * @var array
      */
     protected $fillable = [
-        'menu_id',
+        'menu_alias',
         'label',
         'link',
         'is_new_tab',
@@ -27,6 +37,6 @@ class TagerMenuItem extends Model
 
     protected function getScopeAttributes()
     {
-        return ['menu_id'];
+        return ['menu_alias'];
     }
 }

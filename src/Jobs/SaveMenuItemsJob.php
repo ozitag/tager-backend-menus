@@ -3,26 +3,26 @@
 namespace OZiTAG\Tager\Backend\Menus\Jobs;
 
 use OZiTAG\Tager\Backend\Core\Jobs\Job;
-use OZiTAG\Tager\Backend\Menus\Models\TagerMenu;
 use OZiTAG\Tager\Backend\Menus\Models\TagerMenuItem;
 use OZiTAG\Tager\Backend\Menus\Repositories\MenuItemsRepository;
 
 class SaveMenuItemsJob extends Job
 {
-    private $menu;
+    protected string $alias;
 
-    private $items;
+    protected array $items;
 
-    public function __construct(TagerMenu $menu, $items)
+    public function __construct(string $alias, array $items)
     {
-        $this->menu = $menu;
+        $this->alias = $alias;
+
         $this->items = $items;
     }
 
     private function rec(?TagerMenuItem $parent, $item)
     {
         $model = new TagerMenuItem([
-            'menu_id' => $this->menu->id,
+            'menu_alias' => $this->alias,
             'label' => $item['label'],
             'link' => $item['link'],
             'is_new_tab' => $item['isNewTab'],
@@ -40,12 +40,10 @@ class SaveMenuItemsJob extends Job
 
     public function handle(MenuItemsRepository $menuItemsRepository)
     {
-        $menuItemsRepository->deleteByMenuId($this->menu->id);
+        $menuItemsRepository->deleteByMenuAlias($this->alias);
 
         foreach ($this->items as $item) {
             $this->rec(null, $item);
         }
-
-        return $this->menu;
     }
 }
