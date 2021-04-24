@@ -28,7 +28,7 @@ class ViewMenuFeature extends Feature
 
         $result = [];
         foreach ($items as $item) {
-            $item['model']['label'] = $tagerVariables->processText($item->label);
+            $item['model']->label = $tagerVariables->processText($item['model']->label);
             $result[] = new MenuItemResource($item['model'], $item['children']);
         }
 
