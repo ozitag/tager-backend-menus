@@ -26,7 +26,7 @@ class MenuItemResource extends JsonResource
             'label' => $model->label,
             'link' => $model->link,
             'isNewTab' => $model->is_new_tab ? true : false,
-            'children' => array_map(function (TagerMenuItem $item) {
+            'children' => array_map(function (array $item) {
                 return new AdminMenuItemResource($item['model'], $item['children']);
             }, $this->children)
         ];
