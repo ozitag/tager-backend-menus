@@ -11,7 +11,7 @@ Route::group(['prefix' => 'tager/menus', 'middleware' => 'api.cache'], function 
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', 'auth:api']], function () {
-    Route::group(['middleware' => [AccessControlMiddleware::scopes(MenusScope::Edit)]], function () {
+    Route::group(['middleware' => [AccessControlMiddleware::scopes(MenusScope::Edit->value)]], function () {
         Route::get('/menus/{alias}', [AdminController::class, 'view']);
         Route::put('/menus/{alias}', [AdminController::class, 'update']);
     });

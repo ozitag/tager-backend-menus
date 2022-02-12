@@ -18,7 +18,7 @@ class MenusServiceProvider extends NestedSetServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
 
         TagerScopes::registerGroup(__('tager-menus::scopes.group'), [
-            MenusScope::Edit => __('tager-menus::scopes.edit')
+            MenusScope::Edit->value => __('tager-menus::scopes.edit')
         ]);
     }
 }

@@ -2,9 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Menus\Enums;
 
-use OZiTAG\Tager\Backend\Core\Enums\Enum;
-
-final class MenusScope extends Enum
+enum MenusScope:string
 {
-    const Edit = 'menus.edit';
+    case Edit = 'menus.edit';
 }

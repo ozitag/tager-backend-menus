@@ -2,11 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Menus;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\App;
 use OZiTAG\Tager\Backend\Menus\Structures\TagerMenu;
-use OZiTAG\Tager\Backend\Panel\Contracts\IRouteHandler;
-use OZiTAG\Tager\Backend\Panel\Structures\TagerRouteHandler;
 
 class TagerMenus
 {
